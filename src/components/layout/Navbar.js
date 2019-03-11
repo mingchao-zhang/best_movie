@@ -8,11 +8,11 @@ class Navbar extends Component {
       <div className="Navbar" >
         <div className="homeIconContainer">
         <Link to="/" className="homeIconLink">
-          <i className="fas fa-home" id="icon"></i>
+          <i className="fas fa-home" id="homeIcon"></i>
         </Link>
         </div>
 
-        <p className="siteName">Best Movies</p>
+        <p>Best Movies</p>
         
         <div className="dummy">
           {/* for flex box to work */}
