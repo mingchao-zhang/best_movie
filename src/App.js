@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">  
-          <Route exact path='/' render={ ( ) => <Search movies={this.state.movies}/> }
+          <Route exact path='/best_movie/' render={ ( ) => <Search movies={this.state.movies}/> }
           />
           <Route path="/Gallery" movies={this.state.movies} render={ () => <Gallery movies={this.state.movies}/> } 
           />
