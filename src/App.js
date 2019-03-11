@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Gallery from './components/pages/Gallery'
 import Search from './components/pages/Search'
+import axios from 'axios';
 
 
 /*
@@ -10,12 +11,15 @@ There can only be one top level div in the return statement
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
-    /*
-    const movies = [
-      {id: 0, title: "Lalala", description: "lalalalal"}
-    ]
-    */
+    this.state = {
+      movies: []
+    }
+
+  }
+
+  componentDidMount() {
+    axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=2fd33e07d0f026484d480953158926e1&language=en-US&page=1')
+    .then(res => this.setState({movies: res.data.results}))
   }
 
   render() {
@@ -23,8 +27,10 @@ class App extends Component {
     return (
       <Router>
         <div className="App">  
-          <Route exact path='/' component={Search} goHome={this.goHome} />
-          <Route path="/Gallery" component={Gallery} goHome={this.goHome} />
+          <Route exact path='/' render={ ( ) => <Search movies={this.state.movies}/> }
+          />
+          <Route path="/Gallery" movies={this.state.movies} render={ () => <Gallery movies={this.state.movies}/> } 
+          />
         </div>
       </Router>
     );
