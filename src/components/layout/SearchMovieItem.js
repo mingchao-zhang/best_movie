@@ -16,8 +16,8 @@ export class SearchMovieItem extends Component {
 }
 
 /*
-            this.props.movies.map((movie) => (
-            <div><p key={movie.id}>{movie.title}</p> </div>
-            ))
+     this.props.movies.map((movie) => (
+                <div><p key={movie.id}>{movie.title}</p> </div>
+            ))       
 */
 export default SearchMovieItem;
