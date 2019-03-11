@@ -18,10 +18,6 @@ class App extends Component {
     */
   }
 
-  goHome = (e) => {
-    console.log('Hello')
-  }
-
   render() {
     // We have to wrap everything inside BrowserRouter if we want to use Router
     return (
