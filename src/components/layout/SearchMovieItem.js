@@ -10,7 +10,7 @@ function ListItem(props) {
 export class SearchMovieItem extends Component {
     render() {
         return (
-            <p>hello</p>
+            <p>hello, this works!</p>
         )
     }
 }
