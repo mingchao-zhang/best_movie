@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
-import Projects from './Components/Project'
-import Navbar from './Components/Navbar'
-import './App.css';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+import Gallery from './components/pages/Gallery'
+import Search from './components/pages/Search'
 
 
 /*
 There can only be one top level div in the return statement
 */
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+    /*
+    const movies = [
+      {id: 0, title: "Lalala", description: "lalalalal"}
+    ]
+    */
+  }
+
+  goHome = (e) => {
+    console.log('Hello')
+  }
+
   render() {
+    // We have to wrap everything inside BrowserRouter if we want to use Router
     return (
-      <div className="App">
-        <Navbar />
-        Hello
-        <Projects />
-      </div>
+      <Router>
+        <div className="App">  
+          <Route exact path='/' component={Search} goHome={this.goHome} />
+          <Route path="/Gallery" component={Gallery} goHome={this.goHome} />
+        </div>
+      </Router>
     );
   }
 }

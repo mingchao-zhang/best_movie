@@ -1,0 +1,52 @@
+$NavbarHeight: 80px;
+
+.Navbar {
+    position: relative;
+    background-color: black;
+    display: flex;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    height: $NavbarHeight;
+    line-height: $NavbarHeight;
+    background-color: rgba(0, 0, 0, 1);
+    transition: all 2s ease;
+
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+  
+    justify-content: space-around;
+    align-items: center;
+}
+
+.homeIconContainer {
+    display: block;
+    color: white;
+    transition: all 2s ease;
+}
+
+.homeIconLink {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+
+}
+#icon {
+    transition: all 2s ease;
+    &:hover {
+        transform: scale(1.2, 1.2);
+    }
+}
+
+
+.siteName {
+    display: block;
+    transition: all 2s ease;
+}
+
+.siteName:hover {
+    transform: scale(1.5, 1.5);
+}
