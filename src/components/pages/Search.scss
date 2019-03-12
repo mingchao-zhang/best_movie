@@ -57,29 +57,36 @@
     align-items: center;
 
     .searchMovieItem {
+        background-color: rgba(82, 177, 250, 0.1);
         width: 60vw;
         margin: 10px;
-        padding: 10px;
+        padding: 20px;
         border-style: solid;
         border-color: lightcoral;
         border-radius: 5px;
         display: flex;
         justify-content: flex-start;
-    
+        transition: all 1s ease;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1, 1.1);
+        }
+
         .searchMoviePic {
             
             img {
-                transition: all 1s ease;
                 border-radius: 5px;
-                cursor: pointer;
-                &:hover {
-                    transform: scale(1.1, 1.1);
-                }
             }
         }
     
         .searchMovieText {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: space-between;
             margin-left: 20px;
+
             .searchMovieTitle {
                 font-size: 2rem;
                 font-weight: 700;

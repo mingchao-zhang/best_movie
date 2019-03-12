@@ -24,7 +24,10 @@ class Gallery extends Component  {
                 <GenreItemsDisplay genres={this.props.genres} filterMovies={this.props.filterMovies} />
             </div>
             <div className="galleryMovieList">
-                <GalleryMoviesDisplay galleryMovies={this.props.galleryMovies} />
+                <GalleryMoviesDisplay 
+                    galleryMovies={this.props.galleryMovies} 
+                    showModal={this.props.showModal}
+                />
             </div>
         </React.Fragment>
     )
@@ -58,7 +61,7 @@ class GalleryMovieDisplay extends Component {
     render() {
         const movie = this.props.movie;
         const movie_src = "https://image.tmdb.org/t/p/w185/" + movie.poster_path;
-        return <div className="galleryMoviePic">
+        return <div className="galleryMoviePic" onClick={this.props.showModal.bind(this, movie.id)}>
                     <img src={movie_src} alt={movie.title} />
                 </div>
     }
@@ -68,7 +71,11 @@ class GalleryMovieDisplay extends Component {
 class GalleryMoviesDisplay extends Component {
     render() {
         return (this.props.galleryMovies.map((movie) => (
-                <GalleryMovieDisplay key={movie.id} movie={movie} />
+                <GalleryMovieDisplay 
+                    key={movie.id} 
+                    movie={movie} 
+                    showModal={this.props.showModal}
+                />
         ))
         )
     }

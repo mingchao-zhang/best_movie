@@ -124,6 +124,10 @@ class App extends Component {
     }
   }
 
+  showModal(id) {
+    console.log(id);
+  }
+
   render() {
     // We have to wrap everything inside BrowserRouter if we want to use Router
     return (
@@ -134,6 +138,7 @@ class App extends Component {
             searchMovieHandler={this.searchMovieHandler}
             sortMovie={this.sortMovie}
             changeSortAttr={this.changeSortAttr}
+            showModal={this.showModal}
           /> }
           />
           <Route path="/best_movie/Gallery" movies={this.state.movies} render={ () => 
@@ -142,6 +147,7 @@ class App extends Component {
             genres={this.state.genres}
             filterMovies={this.filterMovies}
             showAllMovies={this.showAllMovies}
+            showModal={this.showModal}
           /> } 
           />
         </div>

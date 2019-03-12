@@ -34,7 +34,10 @@ class Search extends Component {
                 </div>
                 <div className="searchBarBot">
                     <div className="searchMovieList">
-                        <SearchMoviesDisplay searchMovies={this.props.searchMovies} />
+                        <SearchMoviesDisplay 
+                            searchMovies={this.props.searchMovies}
+                            showModal={this.props.showModal}
+                        />
                     </div>     
                 </div>
             </div>
@@ -50,7 +53,7 @@ class SearchMovieDisplay extends Component {
     render() {
         const movie = this.props.movie;
         const movie_src = "https://image.tmdb.org/t/p/w185/" + movie.poster_path;
-        return  <div className="searchMovieItem">
+        return  <div className="searchMovieItem" onClick={this.props.showModal.bind(this, movie.id)}>
                     <div className="searchMoviePic">
                         <img src={movie_src} alt={movie.title} />
                     </div>
@@ -70,7 +73,11 @@ class SearchMovieDisplay extends Component {
 class SearchMoviesDisplay extends Component {
     render() {
         return (this.props.searchMovies.map((movie) => (
-                <SearchMovieDisplay key={movie.id} movie={movie} />
+                <SearchMovieDisplay 
+                    key={movie.id} 
+                    movie={movie} 
+                    showModal={this.props.showModal}
+                />
         ))
         )
     }
