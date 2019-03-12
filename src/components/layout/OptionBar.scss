@@ -5,9 +5,18 @@
     justify-content: space-around;
     align-items: center;
     .optionLink {
+        padding: 10px;
+        border-radius: 5px;
         display: inline-block;
         color: black;
         font-size: 1.2rem;
         text-decoration: none;
+
+        transition: all 1s ease;
+        &:hover {
+            background-color: black;
+            color: white;
+        }
     }
+
 }
