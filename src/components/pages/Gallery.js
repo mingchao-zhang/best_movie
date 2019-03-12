@@ -73,5 +73,6 @@ class GalleryMoviesDisplay extends Component {
         )
     }
 }
+
 export default Gallery;
 

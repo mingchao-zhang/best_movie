@@ -14,8 +14,8 @@ class Search extends Component {
             <OptionBar />
             <div className="searchBar">
                 <div className="searchBarTop">
-                    <input placeholder="Enter the movie name" className="inputBox"/>
-
+                    <input placeholder="Enter the movie name (Use spaces properly)" className="inputBox" onChange={this.props.searchMovieHandler.bind(this)} />
+                    <p>sample name: interstellar, inception, matrix </p>
                     <div className="sortBox">
                         <p>Sort by: </p>
                         <select className="sortItem">
@@ -35,24 +35,46 @@ class Search extends Component {
                 </div>
                 <SearchMovieItem movies={this.props.movies} />
                 <div className="searchBarBot">
-                
-                    <div className="searchMovieItem">
-                        <div className="searchMoviePic">
-                        </div>
-                        <div className="searchMovieText">
-                            <div className="searchMovieTitle">
-                                <p>{/* this.props.movies.title */}</p>
-                            </div>
-                            <div className="searchMovieRank">
-                                <p>{ /*this.props.movies.vote_average */}</p>
-                            </div>
-                        </div>
-                    </div>
+                    <div className="searchMovieList">
+                        <SearchMoviesDisplay searchMovies={this.props.searchMovies} />
+                    </div>     
                 </div>
             </div>
             
         </React.Fragment>
     )
+    }
+}
+
+//movie prefex: https://image.tmdb.org/t/p/w185/
+//--------------------------------------------------------
+class SearchMovieDisplay extends Component {
+    render() {
+        const movie = this.props.movie;
+        const movie_src = "https://image.tmdb.org/t/p/w185/" + movie.poster_path;
+        return  <div className="searchMovieItem">
+                    <div className="searchMoviePic">
+                        <img src={movie_src} alt={movie.title} />
+                    </div>
+                    <div className="searchMovieText">
+                        <div className="searchMovieTitle">
+                            <p>{ movie.title }</p>
+                        </div>
+                        <div className="searchMovieRank">
+                            <p>{ movie.vote_average }</p>
+                        </div>
+                    </div>
+                </div>
+    }
+}
+
+//--------------------------------------------------------
+class SearchMoviesDisplay extends Component {
+    render() {
+        return (this.props.searchMovies.map((movie) => (
+                <SearchMovieDisplay key={movie.id} movie={movie} />
+        ))
+        )
     }
 }
 

@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       movies: [],
       galleryMovies: [],
+      searchMovies: [],
       genres: []
     }
   }
@@ -30,7 +31,7 @@ class App extends Component {
     }
     axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=2fd33e07d0f026484d480953158926e1&language=en-US')
     .then(res => this.setState({genres: res.data.genres}));
-    
+
     // Why doesn't this work?
     //this.setState({ galleryMovies: [...this.state.movies]});
   }
@@ -45,14 +46,25 @@ class App extends Component {
     })
   }
 
+  searchMovieHandler = (e) => {
+    if (e.target.value === "") {
+      this.setState({ searchMovies: [] });
+      return;
+    }
+    this.setState({ searchMovies: [...this.state.movies.filter(movie => movie.title.toLowerCase().includes(e.target.value.toLowerCase()))]
+    });
+    //console.log(this.state.searchMovies)
+  }
+
   render() {
     // We have to wrap everything inside BrowserRouter if we want to use Router
     return (
       <Router>
         <div className="App">  
           <Route exact path='/best_movie/' render={ () => <Search 
-            movies={this.state.movies} 
-            genres={this.state.genres} /> }
+            searchMovies={this.state.searchMovies}
+            searchMovieHandler={this.searchMovieHandler}
+          /> }
           />
           <Route path="/Gallery" movies={this.state.movies} render={ () => 
           <Gallery 
