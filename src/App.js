@@ -19,11 +19,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+    for (var i = 1; i < 11; i++) {
+      axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=2fd33e07d0f026484d480953158926e1&language=en-US&page=' + i.toString())
+      .then(res => {
+        this.setState(
+          {movies: this.state.movies.concat(res.data.results),
+          galleryMovies: this.state.galleryMovies.concat(res.data.results)}
+        );
+      })
+    }
     axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=2fd33e07d0f026484d480953158926e1&language=en-US')
     .then(res => this.setState({genres: res.data.genres}));
-
-    axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=2fd33e07d0f026484d480953158926e1&language=en-US&page=1')
-    .then(res => this.setState({movies: res.data.results, galleryMovies: res.data.results}));
+    
+    // Why doesn't this work?
+    //this.setState({ galleryMovies: [...this.state.movies]});
   }
 
   filterMovies = (id) => {
