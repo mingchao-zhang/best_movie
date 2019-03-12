@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 //import {Link} from "react-router-dom";
 import Navbar from '../layout/Navbar';
 import OptionBar from '../layout/OptionBar';
-import SearchMovieItem from '../layout/SearchMovieItem';
 import './Search.scss'
 
 class Search extends Component {
@@ -25,15 +24,14 @@ class Search extends Component {
                     </div>
 
                     <div className="orderContainer">
-                        <button className="orderButton">
-                            Ascending
+                        <button className="orderButton" id="Ascending" onClick={this.props.sortMovie.bind(this)}>
+                            <p>Ascending</p>
                         </button>
-                        <button className="orderButton">
-                            Descending
+                        <button className="orderButton" id="Descending" onClick={this.props.sortMovie.bind(this)}>
+                            <p>Descending</p>
                         </button>
                     </div>  
                 </div>
-                <SearchMovieItem movies={this.props.movies} />
                 <div className="searchBarBot">
                     <div className="searchMovieList">
                         <SearchMoviesDisplay searchMovies={this.props.searchMovies} />

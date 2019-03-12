@@ -15,12 +15,13 @@ class App extends Component {
       movies: [],
       galleryMovies: [],
       searchMovies: [],
-      genres: []
+      genres: [],
+      order: "Ascending"
     }
   }
 
   componentDidMount() {
-    for (var i = 1; i < 11; i++) {
+    for (var i = 1; i < 21; i++) {
       axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=2fd33e07d0f026484d480953158926e1&language=en-US&page=' + i.toString())
       .then(res => {
         this.setState(
@@ -53,7 +54,25 @@ class App extends Component {
     }
     this.setState({ searchMovies: [...this.state.movies.filter(movie => movie.title.toLowerCase().includes(e.target.value.toLowerCase()))]
     });
-    //console.log(this.state.searchMovies)
+  }
+
+  sortMovieHelper() {
+    if (this.state.order === "Ascending") {
+      this.setState({ searchMovies: this.state.searchMovies.sort() });
+    }
+    else {
+      this.setState({ searchMovies: this.state.searchMovies.sort().reverse() });
+    }
+  }
+
+  sortMovie = (e) => {
+    if (e.target.id === "Ascending") {
+      this.setState({ order: "Ascending" });
+    }
+    else {
+      this.setState({ order: "Descending" });
+    }
+    this.sortMovieHelper();
   }
 
   render() {
@@ -64,6 +83,7 @@ class App extends Component {
           <Route exact path='/best_movie/' render={ () => <Search 
             searchMovies={this.state.searchMovies}
             searchMovieHandler={this.searchMovieHandler}
+            sortMovie={this.sortMovie}
           /> }
           />
           <Route path="/Gallery" movies={this.state.movies} render={ () => 
