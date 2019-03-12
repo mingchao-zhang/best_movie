@@ -10,7 +10,7 @@ class OptionBar extends Component {
         <Link to="/best_movie" className="optionLink">
             Search
         </Link>
-        <Link to="/Gallery" className="optionLink">
+        <Link to="/best_movie/Gallery" className="optionLink">
             Gallery
         </Link>
         <div className="flexDummy"></div>

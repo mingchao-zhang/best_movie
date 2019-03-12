@@ -121,7 +121,7 @@ class App extends Component {
             sortMovie={this.sortMovie}
           /> }
           />
-          <Route path="/Gallery" movies={this.state.movies} render={ () => 
+          <Route path="/best_movie/Gallery" movies={this.state.movies} render={ () => 
           <Gallery 
             galleryMovies={this.state.galleryMovies}
             genres={this.state.genres}
