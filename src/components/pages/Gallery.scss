@@ -9,6 +9,12 @@
         margin: 15px;
         padding: 5px 15px;
         cursor: pointer;
+        transition: all 1s;
+        border-radius: 5px;
+
+        &:hover {
+            transform: scale(1.2, 1.2);
+        }
     }
 }
 
@@ -19,9 +25,21 @@
 
     .galleryMoviePic {
         display: block;
-        padding: 30px;
+        padding: 10px;
 
-        width: 150px;
-        height: auto;
+        img {
+            border-radius: 5px;
+            width: 150px;
+            height: auto;
+            cursor: pointer;
+            transition: all 1s;
+
+            &:hover {
+                transform: scale(1.1, 1.1);
+            }
+        }
+        
+
+        
     }
 }
