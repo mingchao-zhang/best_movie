@@ -20,11 +20,11 @@ class Gallery extends Component  {
             <Navbar />
             <OptionBar />
             <div className="genreList">
-                <div className="genreItem"><p>All</p></div>
-                <GenreItemsDisplay genres={this.props.genres} />
+                <div className="genreItemAll" onClick={this.props.showAllMovies}><p>All</p></div>
+                <GenreItemsDisplay genres={this.props.genres} filterMovies={this.props.filterMovies} />
             </div>
             <div className="galleryMovieList">
-                <GalleryMoviesDisplay movies={this.props.movies} />
+                <GalleryMoviesDisplay galleryMovies={this.props.galleryMovies} />
             </div>
         </React.Fragment>
     )
@@ -34,8 +34,9 @@ class Gallery extends Component  {
 //--------------------------------------------------------
 class GenreItemDisplay extends Component {
     render() {
-        return <div className="genreItem">
-                    <p>{ this.props.genreName }</p>
+        const {id, name} = this.props.genre;
+        return <div className="genreItem" onClick={this.props.filterMovies.bind(this, id)}>
+                    <p>{ name }</p>
                 </div>
     }
     
@@ -45,7 +46,7 @@ class GenreItemDisplay extends Component {
 class GenreItemsDisplay extends Component {
     render() {
         return (this.props.genres.map((genre) => (
-                <GenreItemDisplay key={genre.id} genreName={genre.name} />
+                <GenreItemDisplay key={genre.id} genre={genre} filterMovies={this.props.filterMovies} />
         ))
         )
     }
@@ -66,7 +67,7 @@ class GalleryMovieDisplay extends Component {
 //--------------------------------------------------------
 class GalleryMoviesDisplay extends Component {
     render() {
-        return (this.props.movies.map((movie) => (
+        return (this.props.galleryMovies.map((movie) => (
                 <GalleryMovieDisplay key={movie.id} movie={movie} />
         ))
         )

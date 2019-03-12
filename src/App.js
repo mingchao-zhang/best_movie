@@ -13,6 +13,7 @@ class App extends Component {
     super(props)
     this.state = {
       movies: [],
+      galleryMovies: [],
       genres: []
     }
   }
@@ -22,7 +23,17 @@ class App extends Component {
     .then(res => this.setState({genres: res.data.genres}));
 
     axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=2fd33e07d0f026484d480953158926e1&language=en-US&page=1')
-    .then(res => this.setState({movies: res.data.results}));
+    .then(res => this.setState({movies: res.data.results, galleryMovies: res.data.results}));
+  }
+
+  filterMovies = (id) => {
+    this.setState({ galleryMovies: [...this.state.movies.filter(movie => movie.genre_ids.includes(id))]
+    })
+  }
+
+  showAllMovies = () => {
+    this.setState({ galleryMovies: [...this.state.movies]
+    })
   }
 
   render() {
@@ -36,8 +47,10 @@ class App extends Component {
           />
           <Route path="/Gallery" movies={this.state.movies} render={ () => 
           <Gallery 
-            movies={this.state.movies}
+            galleryMovies={this.state.galleryMovies}
             genres={this.state.genres}
+            filterMovies={this.filterMovies}
+            showAllMovies={this.showAllMovies}
           /> } 
           />
         </div>
