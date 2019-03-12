@@ -17,7 +17,7 @@ class Search extends Component {
                     <p>sample name: interstellar, inception, matrix </p>
                     <div className="sortBox">
                         <p>Sort by: </p>
-                        <select className="sortItem">
+                        <select className="sortItem" onChange={this.props.changeSortAttr}>
                             <option value="0">Rank</option>
                             <option value="1">Name</option>
                         </select>
@@ -25,10 +25,10 @@ class Search extends Component {
 
                     <div className="orderContainer">
                         <button className="orderButton" id="Ascending" onClick={this.props.sortMovie.bind(this)}>
-                            <p>Ascending</p>
+                            <p id="AscendingText">Ascending</p>
                         </button>
                         <button className="orderButton" id="Descending" onClick={this.props.sortMovie.bind(this)}>
-                            <p>Descending</p>
+                            <p id="DescendingText">Descending</p>
                         </button>
                     </div>  
                 </div>

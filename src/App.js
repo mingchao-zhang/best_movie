@@ -38,6 +38,22 @@ class App extends Component {
     //this.setState({ galleryMovies: [...this.state.movies]});
   }
 
+  changeSortAttr = (e) => {
+    const selector = e.target;
+    var newSortAttr;
+    
+    if (selector[selector.selectedIndex].value === "0") {
+      newSortAttr = "vote_average";
+    }
+    else {
+      newSortAttr = "title";
+    }
+    
+    this.setState({ sortAttr: newSortAttr });
+    this.sortMovieHelper(this.state.order, newSortAttr);
+
+  }
+
   filterMovies = (id) => {
     this.setState({ galleryMovies: [...this.state.movies.filter(movie => movie.genre_ids.includes(id))]
     })
@@ -81,16 +97,15 @@ class App extends Component {
     }
   }
 
-  sortMovieHelper() {
+  sortMovieHelper(order, sortAttr) {
     var cmpFunc = null;
-    if (this.state.sortAttr === "vote_average") {
+    if (sortAttr === "vote_average") {
       cmpFunc = this.compareByVoteAverage;
     }
     else {
       cmpFunc = this.compareByTitle;
     }
-
-    if (this.state.order === "Ascending") {
+    if (order === "Ascending") {
       this.setState({ searchMovies: this.state.searchMovies.sort(cmpFunc) });
     }
     else {
@@ -99,15 +114,14 @@ class App extends Component {
   }
 
   sortMovie = (e) => {
-    if (e.target.id === "Ascending") {
+    if (e.target.id === "Ascending" || e.target.id === "AscendingText") {
       this.setState({ order: "Ascending" });
-      console.log(this.state.order);
+      this.sortMovieHelper("Ascending", this.state.sortAttr);
     }
     else {
       this.setState({ order: "Descending" });
-      console.log(this.state.order);
+      this.sortMovieHelper("Descending", this.state.sortAttr);
     }
-    this.sortMovieHelper();
   }
 
   render() {
@@ -119,6 +133,7 @@ class App extends Component {
             searchMovies={this.state.searchMovies}
             searchMovieHandler={this.searchMovieHandler}
             sortMovie={this.sortMovie}
+            changeSortAttr={this.changeSortAttr}
           /> }
           />
           <Route path="/best_movie/Gallery" movies={this.state.movies} render={ () => 
