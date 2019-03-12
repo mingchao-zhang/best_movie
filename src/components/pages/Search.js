@@ -64,7 +64,7 @@ class SearchMovieDisplay extends Component {
                             <p>{ movie.title }</p>
                         </div>
                         <div className="searchMovieRank">
-                            <p>Rating: { movie.vote_average }</p>
+                            <p>Rank: { movie.rank }</p>
                         </div>
                     </div>
                 </div>

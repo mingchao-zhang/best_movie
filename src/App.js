@@ -10,32 +10,43 @@ There can only be one top level div in the return statement
 */
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       movies: [],
       galleryMovies: [],
       searchMovies: [],
       genres: [],
       order: "Ascending",
-      sortAttr: "vote_average"
+      sortAttr: "vote_average",
+    };
+    this.pageNum = 20;
+    this.total = 0;
+    this.itr = 0;
+    this.movieCopies = []
+  }
+
+  addRank(res) {
+    this.movieCopies = this.movieCopies.concat(res.data.results);
+    this.itr += 1;
+    if (this.itr === this.pageNum) {
+
+      for (var i = 0; i < this.movieCopies.length; i++) {
+        this.movieCopies[i]["rank"] = i + 1;
+      }
+      this.setState({movies: this.movieCopies,
+        galleryMovies: this.movieCopies})
     }
   }
 
   componentDidMount() {
-    for (var i = 1; i < 21; i++) {
+    for (var i = 1; i < this.pageNum + 1; i++) {
       axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=2fd33e07d0f026484d480953158926e1&language=en-US&page=' + i.toString())
       .then(res => {
-        this.setState(
-          {movies: this.state.movies.concat(res.data.results),
-          galleryMovies: this.state.galleryMovies.concat(res.data.results)}
-        );
-      })
-    }
+        this.setState(this.addRank(res))
+        });
+      }
     axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=2fd33e07d0f026484d480953158926e1&language=en-US')
     .then(res => this.setState({genres: res.data.genres}));
-
-    // Why doesn't this work?
-    //this.setState({ galleryMovies: [...this.state.movies]});
   }
 
   changeSortAttr = (e) => {
@@ -56,7 +67,7 @@ class App extends Component {
 
   filterMovies = (id) => {
     this.setState({ galleryMovies: [...this.state.movies.filter(movie => movie.genre_ids.includes(id))]
-    })
+    });
   }
 
   showAllMovies = () => {
@@ -73,11 +84,11 @@ class App extends Component {
     });
   }
 
-  compareByVoteAverage(a, b) {
-    if (a.vote_average < b.vote_average) {
+  compareByRank(a, b) {
+    if (a.rank < b.rank) {
       return -1;
     }
-    else if (a.vote_average > b.vote_average) {
+    else if (a.rank > b.rank) {
       return 1;
     }
     else {
@@ -100,7 +111,7 @@ class App extends Component {
   sortMovieHelper(order, sortAttr) {
     var cmpFunc = null;
     if (sortAttr === "vote_average") {
-      cmpFunc = this.compareByVoteAverage;
+      cmpFunc = this.compareByRank;
     }
     else {
       cmpFunc = this.compareByTitle;

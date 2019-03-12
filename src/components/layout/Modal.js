@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import './Modal.scss'
 
 class Modal extends Component {
-  render() {
+    hide_modal() {
+        var modal = document.getElementsByClassName("modal")[0];
+        modal.style.display = "none";
+    }
+
+    render() {
     return (
         <div className="modal">
             <div className="modal_box">
@@ -10,7 +15,7 @@ class Modal extends Component {
                     <div className="arrow" id="arrow_left">
                         <i className="fas fa-arrow-left"></i>
                     </div>
-                    <div className="modal_button">
+                    <div className="modal_button" onClick={this.hide_modal}>
                         <i className="fas fa-window-close"></i>
                     </div>
                     <div className="arrow" id="arrow_right">
@@ -29,7 +34,7 @@ class Modal extends Component {
             </div>
         </div>
     )
-  }
+    }
 }
 
 export default Modal;
