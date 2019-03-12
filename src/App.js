@@ -16,7 +16,8 @@ class App extends Component {
       galleryMovies: [],
       searchMovies: [],
       genres: [],
-      order: "Ascending"
+      order: "Ascending",
+      sortAttr: "vote_average"
     }
   }
 
@@ -56,21 +57,55 @@ class App extends Component {
     });
   }
 
-  sortMovieHelper() {
-    if (this.state.order === "Ascending") {
-      this.setState({ searchMovies: this.state.searchMovies.sort() });
+  compareByVoteAverage(a, b) {
+    if (a.vote_average < b.vote_average) {
+      return -1;
+    }
+    else if (a.vote_average > b.vote_average) {
+      return 1;
     }
     else {
-      this.setState({ searchMovies: this.state.searchMovies.sort().reverse() });
+      return 0;
+    }
+  }
+
+  compareByTitle(a, b) {
+    if (a.title < b.title) {
+      return -1;
+    }
+    else if (a.title > b.title) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  sortMovieHelper() {
+    var cmpFunc = null;
+    if (this.state.sortAttr === "vote_average") {
+      cmpFunc = this.compareByVoteAverage;
+    }
+    else {
+      cmpFunc = this.compareByTitle;
+    }
+
+    if (this.state.order === "Ascending") {
+      this.setState({ searchMovies: this.state.searchMovies.sort(cmpFunc) });
+    }
+    else {
+      this.setState({ searchMovies: this.state.searchMovies.sort(cmpFunc).reverse() });
     }
   }
 
   sortMovie = (e) => {
     if (e.target.id === "Ascending") {
       this.setState({ order: "Ascending" });
+      console.log(this.state.order);
     }
     else {
       this.setState({ order: "Descending" });
+      console.log(this.state.order);
     }
     this.sortMovieHelper();
   }
