@@ -1,19 +1,20 @@
 .searchBar {
-    width: 100vw;
     text-align: center;
     .searchBarTop {
         display: inline-block;
-        width: 60%;
+        width: 70vw;
         text-align: center;
         background-color: antiquewhite;
-        border-radius: 5px;
+        border-radius: 10px;
+        border: solid;
 
         .inputBox {
             display: inline-block;
             width: 90%;
             height: 30px;
-            margin-top: 5px;
+            margin-top: 10px;
             padding: 10px;
+            border-radius: 5px;
             
             font-size: 1rem;    
             text-align: center;
@@ -58,7 +59,7 @@
 
     .searchMovieItem {
         background-color: rgba(82, 177, 250, 0.1);
-        width: 60vw;
+        width: 70vw;
         margin: 10px;
         padding: 20px;
         border-style: solid;

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 //import {Link} from "react-router-dom";
 import Navbar from '../layout/Navbar';
 import OptionBar from '../layout/OptionBar';
+import Modal from '../layout/Modal';
 import './Gallery.scss'
 //import { generateKeyPair } from 'crypto';
 
@@ -17,6 +18,7 @@ class Gallery extends Component  {
     return (
         // a wrapper to include all elements since we can only return one global element
         <React.Fragment>
+            <Modal />
             <Navbar />
             <OptionBar />
             <div className="genreList">
