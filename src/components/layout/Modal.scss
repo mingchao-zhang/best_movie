@@ -30,11 +30,14 @@
         padding: 0;
         top: 0;
         margin: 30px auto;
-        height: 70%;
+        height: 90%;
         width: 60%;
         border: solid plum;
         border-radius: 10px;
         background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
 
         .modal_header {
             display: flex;
@@ -56,7 +59,8 @@
             border: solid white;
             padding: 5px;
             display: flex;
-            justify-content: center;
+            align-items: center;
+
 
             .modal_image_container {
                 margin-right: 20px;
@@ -70,9 +74,6 @@
                 flex-direction: column;
                 justify-content: center;
 
-                .modal_title {
-                    text-align: center;
-                }
             }
         }
     }

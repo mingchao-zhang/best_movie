@@ -18,7 +18,9 @@ class Gallery extends Component  {
     return (
         // a wrapper to include all elements since we can only return one global element
         <React.Fragment>
-            <Modal />
+            <Modal 
+                modalArrowLeftClick={this.props.modalArrowLeftClick}
+                modalArrowRightClick={this.props.modalArrowRightClick} />
             <Navbar />
             <OptionBar />
             <div className="genreList">

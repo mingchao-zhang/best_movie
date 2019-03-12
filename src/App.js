@@ -22,7 +22,8 @@ class App extends Component {
     this.pageNum = 20;
     this.total = 0;
     this.itr = 0;
-    this.movieCopies = []
+    this.movieCopies = [];
+    this.modalRank = 1;
   }
 
   addRank(res) {
@@ -138,20 +139,43 @@ class App extends Component {
   }
 
   //WHy do I have to do =() =>???
-  showModal = (rank) => {
-
+  showModal = (_rank) => {
+    
+    this.modalRank = _rank;
     var modal = document.getElementsByClassName("modal")[0];
     modal.style.display = "flex";
 
-    var movie = this.movieCopies[rank - 1];
+    var movie = this.movieCopies[this.modalRank - 1];
     var image = document.getElementById("_modal_image");
     image.src = "https://image.tmdb.org/t/p/w185/" + movie.poster_path;
     image.alt = movie.title;
     
     var title = document.getElementById("_modal_title");
-    title.innerHTML = "<h2>" + movie.title + "</h2>";
+    title.innerHTML = "<h1>" + movie.title + "</h1>";
     var description = document.getElementById("_modal_description");
     description.innerHTML =  "<p>" + movie.overview + "</p>";
+    var rank = document.getElementById("_modal_rank");
+    rank.innerHTML = "<h2><p> Rank: " + movie.rank + "</p></h2>";
+  }
+
+  modalArrowLeftClick = () => {
+    if (this.modalRank === 1) {
+      this.modalRank = this.movieCopies.length;
+    }
+    else {
+      this.modalRank = this.modalRank - 1;
+    }
+    this.showModal(this.modalRank);
+  }
+
+  modalArrowRightClick = () => {
+    if (this.modalRank === this.movieCopies.length) {
+      this.modalRank = 1;
+    }
+    else {
+      this.modalRank = this.modalRank + 1;
+    }
+    this.showModal(this.modalRank);
   }
 
   render() {
@@ -165,6 +189,8 @@ class App extends Component {
             sortMovie={this.sortMovie}
             changeSortAttr={this.changeSortAttr}
             showModal={this.showModal}
+            modalArrowLeftClick={this.modalArrowLeftClick}
+            modalArrowRightClick={this.modalArrowRightClick}
           /> }
           />
           <Route path="/best_movie/Gallery" movies={this.state.movies} render={ () => 
@@ -174,6 +200,8 @@ class App extends Component {
             filterMovies={this.filterMovies}
             showAllMovies={this.showAllMovies}
             showModal={this.showModal}
+            modalArrowLeftClick={this.modalArrowLeftClick}
+            modalArrowRightClick={this.modalArrowRightClick}
           /> } 
           />
         </div>
