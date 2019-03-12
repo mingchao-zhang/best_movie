@@ -15,7 +15,7 @@
 
 .modal {
     position: fixed;
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
 
@@ -32,7 +32,9 @@
         margin: 30px auto;
         height: 70%;
         width: 60%;
-        border: solid white;
+        border: solid plum;
+        border-radius: 10px;
+        background-color: white;
 
         .modal_header {
             display: flex;
@@ -52,6 +54,26 @@
 
         .modal_content {
             border: solid white;
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+
+            .modal_image_container {
+                margin-right: 20px;
+                img {
+                    border-radius: 8px;
+                }
+            }
+
+            .modal_text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .modal_title {
+                    text-align: center;
+                }
+            }
         }
     }
 }

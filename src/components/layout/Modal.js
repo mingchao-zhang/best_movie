@@ -6,10 +6,17 @@ class Modal extends Component {
         var modal = document.getElementsByClassName("modal")[0];
         modal.style.display = "none";
     }
+    
+    modal_click_outside(evt) {
+        var modal = document.getElementsByClassName("modal")[0];
+        if (evt.target === modal) {
+            modal.style.display = "none";
+        }
+    }
 
     render() {
     return (
-        <div className="modal">
+        <div className="modal" onClick={this.modal_click_outside}>
             <div className="modal_box">
                 <div className="modal_header">
                     <div className="arrow" id="arrow_left">
@@ -23,11 +30,14 @@ class Modal extends Component {
                     </div>
                 </div>
                 <div className="modal_content">
-                    <div className="modal_image_container"></div>
+                    <div className="modal_image_container" >
+                        <img src="" alt="" id="_modal_image"/>
+                    </div>
+
                     <div className="modal_text">
-                        <div className="modal_title">
+                        <div className="modal_title" id="_modal_title">
                         </div>
-                        <div className="modal_description">
+                        <div className="modal_description" id="_modal_description">
                         </div>
                     </div> 
                 </div>

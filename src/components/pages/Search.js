@@ -55,7 +55,7 @@ class SearchMovieDisplay extends Component {
     render() {
         const movie = this.props.movie;
         const movie_src = "https://image.tmdb.org/t/p/w185/" + movie.poster_path;
-        return  <div className="searchMovieItem" onClick={this.props.showModal.bind(this, movie.id)}>
+        return  <div className="searchMovieItem" onClick={this.props.showModal.bind(this, movie.rank)}>
                     <div className="searchMoviePic">
                         <img src={movie_src} alt={movie.title} />
                     </div>

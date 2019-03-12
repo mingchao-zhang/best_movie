@@ -63,7 +63,7 @@ class GalleryMovieDisplay extends Component {
     render() {
         const movie = this.props.movie;
         const movie_src = "https://image.tmdb.org/t/p/w185/" + movie.poster_path;
-        return <div className="galleryMoviePic" onClick={this.props.showModal.bind(this, movie.id)}>
+        return <div className="galleryMoviePic" onClick={this.props.showModal.bind(this, movie.rank)}>
                     <img src={movie_src} alt={movie.title} />
                 </div>
     }

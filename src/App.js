@@ -66,6 +66,7 @@ class App extends Component {
   }
 
   filterMovies = (id) => {
+    console.log(this.movieCopies);
     this.setState({ galleryMovies: [...this.state.movies.filter(movie => movie.genre_ids.includes(id))]
     });
   }
@@ -97,6 +98,7 @@ class App extends Component {
   }
 
   compareByTitle(a, b) {
+    //console.log(this.movieCopies)
     if (a.title < b.title) {
       return -1;
     }
@@ -135,8 +137,21 @@ class App extends Component {
     }
   }
 
-  showModal(id) {
-    console.log(id);
+  //WHy do I have to do =() =>???
+  showModal = (rank) => {
+
+    var modal = document.getElementsByClassName("modal")[0];
+    modal.style.display = "flex";
+
+    var movie = this.movieCopies[rank - 1];
+    var image = document.getElementById("_modal_image");
+    image.src = "https://image.tmdb.org/t/p/w185/" + movie.poster_path;
+    image.alt = movie.title;
+    
+    var title = document.getElementById("_modal_title");
+    title.innerHTML = "<h2>" + movie.title + "</h2>";
+    var description = document.getElementById("_modal_description");
+    description.innerHTML =  "<p>" + movie.overview + "</p>";
   }
 
   render() {
